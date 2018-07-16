@@ -1,0 +1,65 @@
+<mat-card>
+  <p>
+    Please write the date and time from when you started to when you ended.
+  </p>
+
+
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+
+    <form class="col1" fxLayout="column" fxFlex="50" [formGroup]="timeForm" (ngSubmit)="onDateTimeSubmit(timeForm)">
+
+      <div class="control1" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+
+        <mat-form-field appearance="fill" fxFlex="75%">
+          <mat-label>Start Date</mat-label>
+          <input class="date-control" [textMask]="{mask: mask}" matInput placeholder="mm/dd/yyy hh:mm" formControlName="startDate">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" fxFlex="25%">
+          <mat-select formControlName="amPM1">
+            <mat-option *ngFor="let item of amOrPm" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <div class="control2" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+
+        <mat-form-field appearance="fill" fxFlex="75%">
+          <mat-label>End Date</mat-label>
+          <input matInput placeholder="mm/dd/yyy hh:mm" [textMask]="{mask: mask}" formControlName="endDate">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" fxFlex="25%">
+          <mat-select formControlName="amPM2">
+            <mat-option *ngFor="let item of amOrPm" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+      <button mat-raised-button color="primary">Calculate</button>
+
+    </form>
+
+    <div class="col2" fxFlex="50">
+      <div fxLayout="column" fxLayoutAlign="center center" *ngIf="showResult">
+        <p>Start Date: {{startDateString | date:'EEEE, MMMM dd, yyyy hh:mm a'}} </p>
+        <p>End Date: {{endDateString | date:'EEEE, MMMM dd, yyyy hh:mm a'}} </p>
+        <p>Time Difference: {{timeDifference?.hours}} Hours and {{timeDifference?.minutes}} minutes. </p>
+        <button mat-button color="primary" (click)="registerTimeSheet()"> Commit</button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <br>
+
+
+</mat-card>

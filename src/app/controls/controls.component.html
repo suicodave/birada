@@ -1,0 +1,30 @@
+<!-- horizontal -->
+<div fxLayout="row" fxLayoutAlign="center center">
+
+
+
+  <div fxFlex="95%"  fxLayoutAlign="center center" fxLayout="row">
+
+    <div class="container" fxFlex="55%">
+
+      <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="25px">
+        <app-attendance-modal (onRegisterTimeSheetEvent)="getTimeSheet($event)">
+
+        </app-attendance-modal>
+
+
+
+        <app-timetable [data]="timeSheetData">
+
+        </app-timetable>
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+
+
+</div>
