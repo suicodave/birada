@@ -1,0 +1,39 @@
+<p mat-dialog-title>
+  Wait there's more!
+</p>
+
+<mat-dialog-content>
+  <form [formGroup]="signatoryForm" (ngSubmit)="onFormSubmit(signatoryForm)" fxLayout="column" fxLayoutAlign="center center"
+    fxLayoutGap="5px">
+
+    <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Your Name</mat-label>
+        <input matInput formControlName="employeeName" placeholder="Full Name">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Your Supervisor's Name</mat-label>
+        <input matInput formControlName="officerName" placeholder="Bossing">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Branch</mat-label>
+        <input matInput formControlName="branchName">
+      </mat-form-field>
+    </p>
+
+    <button style="display: none"></button>
+
+
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+
+  <button mat-button (click)="onFormSubmit(signatoryForm)">Payr</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

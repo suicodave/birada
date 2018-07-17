@@ -86,9 +86,13 @@ export class AttendanceModalComponent implements OnInit {
       difference: this.timeDifference
     };
     this.showResult = false;
-    this.snackBar.open('Saved successfully!', 'close');
-    this.tsService.registerTimeSheet(data);
-
+    this.tsService.registerTimeSheet(data).subscribe(
+      (insertedData) => {
+        this.snackBar.open('Data has been saved.', 'Close', {
+          duration: 3000
+        });
+      }
+    );
   }
 
 }

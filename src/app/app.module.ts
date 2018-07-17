@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '../../node_modules/@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { TimeSheetDataSource } from './shared/time-sheet-data-source';
 import { TimesheetServiceService } from './shared/timesheet-service.service';
+import { SignatoryComponent } from './modal/signatory/signatory.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { TimesheetServiceService } from './shared/timesheet-service.service';
     ControlsComponent,
     TimetableComponent,
     AttendanceModalComponent,
-    AttendanceModalComponent
+    AttendanceModalComponent,
+    SignatoryComponent
   ],
   imports: [
     BrowserModule,
@@ -32,8 +34,8 @@ import { TimesheetServiceService } from './shared/timesheet-service.service';
     ReactiveFormsModule,
     TextMaskModule
   ],
-  providers: [TimeSheetDataSource,TimesheetServiceService ],
+  providers: [TimeSheetDataSource, TimesheetServiceService],
   bootstrap: [AppComponent],
-  entryComponents: [AttendanceModalComponent]
+  entryComponents: [SignatoryComponent]
 })
 export class AppModule { }
