@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatCardModule, MatSidenavModule, MatTableModule, MatFormFieldModule, MatMenuModule, MatToolbarModule, MatIconModule, MatDialogModule, MatInputModule, MatSelectModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatSidenavModule, MatTableModule, MatFormFieldModule, MatMenuModule, MatToolbarModule, MatIconModule, MatDialogModule, MatInputModule, MatSelectModule, MatSnackBarModule, MatCheckboxModule, MatTooltipModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -35,6 +35,15 @@ import { MatButtonModule, MatCardModule, MatSidenavModule, MatTableModule, MatFo
     MatMenuModule,
     MatCheckboxModule,
     MatTooltipModule
+  ],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      }
+    }
   ],
   declarations: []
 })

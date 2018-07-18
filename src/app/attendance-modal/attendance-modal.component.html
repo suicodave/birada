@@ -5,9 +5,9 @@
 
 
 
-  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+  <div  fxLayoutGap="20px">
 
-    <form class="col1" fxLayout="column" fxFlex="50" [formGroup]="timeForm" (ngSubmit)="onDateTimeSubmit(timeForm)">
+    <form class="col1" fxLayout="column"  [formGroup]="timeForm" (ngSubmit)="onDateTimeSubmit(timeForm)">
 
       <div class="control1" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
 
@@ -42,19 +42,16 @@
         </mat-form-field>
 
       </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Reason</mat-label>
+        <textarea name="" matInput formControlName="reason"></textarea>
+      </mat-form-field>
+
       <button mat-raised-button color="primary">Calculate</button>
 
     </form>
 
-    <div class="col2" fxFlex="50">
-      <div fxLayout="column" fxLayoutAlign="center center" *ngIf="showResult">
-        <p>Start Date: {{startDateString | date:'EEEE, MMMM dd, yyyy hh:mm a'}} </p>
-        <p>End Date: {{endDateString | date:'EEEE, MMMM dd, yyyy hh:mm a'}} </p>
-        <p>Time Difference: {{timeDifference?.hours}} Hours and {{timeDifference?.minutes}} minutes. </p>
-        <button mat-button color="primary" (click)="registerTimeSheet()"> Commit</button>
-      </div>
-
-    </div>
 
   </div>
 

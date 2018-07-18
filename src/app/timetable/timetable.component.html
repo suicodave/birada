@@ -25,13 +25,20 @@
     <!-- Difference Column -->
     <ng-container matColumnDef="difference">
       <th mat-header-cell *matHeaderCellDef> Time Lapsed </th>
-      <td mat-cell *matCellDef="let element"> {{element.difference.hours}} Hour(s) and {{element.difference.minutes}} Minute(s) </td>
+      <td mat-cell *matCellDef="let element"> {{element.difference.hours}} hour(s) and {{element.difference.minutes}} minute(s) </td>
       <td mat-footer-cell *matFooterCellDef>
         <span *ngIf="totalDifference.hasOwnProperty('hours')">
-          {{totalDifference?.hours}} Hour(s) and {{totalDifference?.minutes}} Minute(s)
+          {{totalDifference?.hours}} hour(s) and {{totalDifference?.minutes}} minute(s)
         </span>
 
       </td>
+    </ng-container>
+
+    <!-- Reason Column -->
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef> Reason </th>
+      <td mat-cell *matCellDef="let element"> {{element.reason | slice:0:6}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
     </ng-container>
 
     <!-- Action Column -->

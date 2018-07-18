@@ -12,7 +12,7 @@ import { SignatoryComponent } from '../modal/signatory/signatory.component';
 export class TimetableComponent implements OnInit {
   @Input() data = [];
   dataSource: TimeSheetDataSource;
-  displayedColumns = ['startDate', 'endDate', 'difference', 'remove'];
+  displayedColumns = ['startDate', 'endDate', 'difference', 'reason' ,'remove'];
   totalDifference;
   constructor(private tsService: TimesheetServiceService, private snackBar: MatSnackBar, private signatoryModal: MatDialog) { }
 
@@ -72,5 +72,6 @@ export interface TimeSheet {
     hours: string,
     minutes: string
   };
+  reason: string
 }
 

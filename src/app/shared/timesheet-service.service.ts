@@ -47,6 +47,7 @@ export class TimesheetServiceService {
       startDate: data.startDate,
       endDate: data.endDate,
       difference: data.difference,
+      reason: data.reason
     };
 
     const totalDifference = this.totalDuration(this.data);
