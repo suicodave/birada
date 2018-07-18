@@ -277,7 +277,9 @@ export class SignatoryComponent implements OnInit {
 
     }
 
-    pdfMake.createPdf(dd).download();
+    const fileDate = formatDate(new Date(), 'MM/dd/YYYY', 'en');
+
+    pdfMake.createPdf(dd).download(`overtime-${fileDate}`);
   }
 
 }

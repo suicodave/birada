@@ -3,8 +3,12 @@
 
 
 
-  <div fxFlex="95%"  fxLayoutAlign="center center" fxLayout="row">
-
+  <div fxFlex="95%" fxLayoutAlign="center center" fxLayout="row wrap">
+    <div class="banner">
+      <p>
+        1st Valley Bank Overtime Calculator
+      </p>
+    </div>
     <div class="container" fxFlex="100%">
 
       <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
@@ -13,7 +17,7 @@
 
 
 
-        <app-timetable [data]="timeSheetData" fxFlex="65%" >
+        <app-timetable [data]="timeSheetData" fxFlex="65%">
         </app-timetable>
 
       </div>
