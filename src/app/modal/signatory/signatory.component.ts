@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TimesheetServiceService } from '../../shared/timesheet-service.service';
 import { formatDate } from '@angular/common';
-import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfMake from 'pdfmake/build/pdfmake.min';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { MatDialogRef } from '../../../../node_modules/@angular/material';
+import { MatDialogRef } from 'node_modules/@angular/material';
 @Component({
   selector: 'app-signatory',
   templateUrl: './signatory.component.html',
