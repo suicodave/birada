@@ -11,18 +11,12 @@
 
       <div class="control1" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
 
-        <mat-form-field appearance="fill" fxFlex="75%">
+        <mat-form-field appearance="fill" fxFlex="100%">
           <mat-label>Start Date</mat-label>
-          <input class="date-control" [textMask]="{mask: mask}" matInput placeholder="mm/dd/yyy hh:mm" formControlName="startDate">
+          <input class="date-control" [textMask]="{mask: mask1}" matInput placeholder="mm/dd/yyy" formControlName="startDate">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" fxFlex="25%">
-          <mat-select formControlName="amPM1">
-            <mat-option *ngFor="let item of amOrPm" [value]="item">
-              {{item}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        
 
       </div>
 
@@ -30,7 +24,7 @@
 
         <mat-form-field appearance="fill" fxFlex="75%">
           <mat-label>End Date</mat-label>
-          <input matInput placeholder="mm/dd/yyy hh:mm" [textMask]="{mask: mask}" formControlName="endDate">
+          <input matInput placeholder="mm/dd/yyy hh:mm" [textMask]="{mask: mask2}" formControlName="endDate">
         </mat-form-field>
 
         <mat-form-field appearance="fill" fxFlex="25%">

@@ -13,7 +13,8 @@ export class AttendanceModalComponent implements OnInit {
   timeForm: FormGroup;
   showResult = false;
 
-  mask = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[1-9]/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /[0-1]/, /\d/, ':', /[0-6]/, /\d/];
+  mask1 = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[1-9]/, '/', /\d/, /\d/, /\d/, /\d/];
+  mask2 = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[0-9]/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /[0-1]/, /\d/, ':', /[0-6]/, /\d/];
   @Output() onRegisterTimeSheetEvent = new EventEmitter();
   startDateString;
   endDateString;
@@ -29,7 +30,6 @@ export class AttendanceModalComponent implements OnInit {
     this.timeForm = this.formBuilder.group({
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      amPM1: [this.amOrPm[0], Validators.required],
       amPM2: [this.amOrPm[0], Validators.required],
       reason: ['', Validators.required]
     });
@@ -40,7 +40,7 @@ export class AttendanceModalComponent implements OnInit {
       this.snackBar.open('Invalid data please check your entries!', 'Okay');
       return;
     }
-    const startDateString = this.concatDateString(form.value.startDate, form.value.amPM1);
+    const startDateString = this.concatDateString(`${form.value.startDate} 05:30`, 'PM');
     const endDateString = this.concatDateString(form.value.endDate, form.value.amPM2);
 
 
@@ -55,7 +55,7 @@ export class AttendanceModalComponent implements OnInit {
     this.reason = form.value.reason;
 
     this.registerTimeSheet();
-
+    this.timeForm.reset();
 
 
 
