@@ -1,28 +1,23 @@
 <mat-card>
   <p>
     Please write the date and time from when you started to when you ended.
+    <br> Note: Overtime starts at {{OVERTIME_START}}
   </p>
 
 
 
-  <div  fxLayoutGap="20px">
+  <div fxLayoutGap="20px">
 
-    <form class="col1" fxLayout="column"  [formGroup]="timeForm" (ngSubmit)="onDateTimeSubmit(timeForm)">
+    <form class="col1" fxLayout="column" [formGroup]="timeForm" (ngSubmit)="onDateTimeSubmit(timeForm)">
 
       <div class="control1" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
 
-        <mat-form-field appearance="fill" fxFlex="75%">
+        <mat-form-field appearance="fill" fxFlex="100%">
           <mat-label>Start Date</mat-label>
-          <input class="date-control" [textMask]="{mask: mask}" matInput placeholder="mm/dd/yyy hh:mm" formControlName="startDate">
+          <input class="date-control" [textMask]="{mask: mask1}" matInput placeholder="mm/dd/yyy hh:mm" autocomplete="off" formControlName="startDate">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" fxFlex="25%">
-          <mat-select formControlName="amPM1">
-            <mat-option *ngFor="let item of amOrPm" [value]="item">
-              {{item}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+
 
       </div>
 
@@ -30,7 +25,7 @@
 
         <mat-form-field appearance="fill" fxFlex="75%">
           <mat-label>End Date</mat-label>
-          <input matInput placeholder="mm/dd/yyy hh:mm" [textMask]="{mask: mask}" formControlName="endDate">
+          <input matInput placeholder="mm/dd/yyy hh:mm" autocomplete="off" [textMask]="{mask: mask2}" formControlName="endDate">
         </mat-form-field>
 
         <mat-form-field appearance="fill" fxFlex="25%">
@@ -56,7 +51,7 @@
   </div>
 
 
-  <br>
+
 
 
 </mat-card>

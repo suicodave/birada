@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { TimesheetServiceService } from '../shared/timesheet-service.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-attendance-modal',
@@ -9,11 +10,14 @@ import { TimesheetServiceService } from '../shared/timesheet-service.service';
   styleUrls: ['./attendance-modal.component.scss']
 })
 export class AttendanceModalComponent implements OnInit {
+  OVERTIME_START = '05:30 PM';
   amOrPm = ['AM', 'PM'];
   timeForm: FormGroup;
   showResult = false;
 
-  mask = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[1-9]/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /[0-1]/, /\d/, ':', /[0-6]/, /\d/];
+
+  mask1 = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[1-9]/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /[0-1]/, /[5-9]/, ':', /[0-6]/, /\d/];
+  mask2 = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[1-9]/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /[0-1]/, /\d/, ':', /[0-6]/, /\d/];
   @Output() onRegisterTimeSheetEvent = new EventEmitter();
   startDateString;
   endDateString;
@@ -29,7 +33,6 @@ export class AttendanceModalComponent implements OnInit {
     this.timeForm = this.formBuilder.group({
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      amPM1: [this.amOrPm[0], Validators.required],
       amPM2: [this.amOrPm[0], Validators.required],
       reason: ['', Validators.required]
     });
@@ -40,7 +43,7 @@ export class AttendanceModalComponent implements OnInit {
       this.snackBar.open('Invalid data please check your entries!', 'Okay');
       return;
     }
-    const startDateString = this.concatDateString(form.value.startDate, form.value.amPM1);
+    const startDateString = this.concatDateString(form.value.startDate, 'PM');
     const endDateString = this.concatDateString(form.value.endDate, form.value.amPM2);
 
 
@@ -54,13 +57,28 @@ export class AttendanceModalComponent implements OnInit {
     this.timeDifference = this.differentiateTime(this.startDateString, this.endDateString);
     this.reason = form.value.reason;
 
+    const shouldStartAtFiveThirty = this.shouldStartAtFiveThirty(this.startDateString);
+
+    if (!shouldStartAtFiveThirty) {
+      this.snackBar.open(`Overtime must start at ${this.OVERTIME_START}. Please check your starting date and time.`, 'Close');
+      return;
+    }
+
     this.registerTimeSheet();
 
 
+  }
 
+  shouldStartAtFiveThirty(date) {
+    const extractedDate = formatDate(date, 'MM/dd/yyyy', 'en');
 
+    const fiveThirtyDate = `${extractedDate} ${this.OVERTIME_START}`;
+    const startDate = formatDate(date, 'MM/dd/yyyy hh:mm a', 'en');
 
+    const convertedFiveThirtyDate = new Date(fiveThirtyDate);
+    const convertedStartDate = new Date(startDate);
 
+    return convertedStartDate >= convertedFiveThirtyDate;
   }
 
   concatDateString(startDate, amPM) {
