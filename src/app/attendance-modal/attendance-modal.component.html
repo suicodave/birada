@@ -1,7 +1,12 @@
 <mat-card>
   <p>
     Please write the date and time from when you started to when you ended.
-    <br> Note: Overtime starts at {{OVERTIME_START}}
+    <br> Note: Overtime starts at
+    <br>
+
+  </p>
+  <p *ngFor="let  time of OVERTIME_START">
+    {{time[1]}} for {{time[0]}} Time in
   </p>
 
 
@@ -12,11 +17,18 @@
 
       <div class="control1" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
 
-        <mat-form-field appearance="fill" fxFlex="100%">
+        <mat-form-field appearance="fill" fxFlex="65%">
           <mat-label>Start Date</mat-label>
           <input class="date-control" [textMask]="{mask: mask1}" matInput placeholder="mm/dd/yyy hh:mm" autocomplete="off" formControlName="startDate">
         </mat-form-field>
 
+        <mat-form-field appearance="fill" fxFlex="35%">
+          <mat-select formControlName="timeSlot">
+            <mat-option *ngFor="let item of OVERTIME_START" [value]="item[1]">
+              {{item[0]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
 
       </div>
