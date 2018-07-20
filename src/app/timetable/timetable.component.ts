@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { TimeSheetDataSource } from '../shared/time-sheet-data-source';
 import { TimesheetServiceService } from '../shared/timesheet-service.service';
@@ -10,9 +10,8 @@ import { SignatoryComponent } from '../modal/signatory/signatory.component';
   styleUrls: ['./timetable.component.scss']
 })
 export class TimetableComponent implements OnInit {
-  @Input() data = [];
   dataSource: TimeSheetDataSource;
-  displayedColumns = ['startDate', 'endDate', 'difference', 'reason' ,'remove'];
+  displayedColumns = ['startDate', 'endDate', 'difference', 'reason', 'remove'];
   totalDifference;
   constructor(private tsService: TimesheetServiceService, private snackBar: MatSnackBar, private signatoryModal: MatDialog) { }
 

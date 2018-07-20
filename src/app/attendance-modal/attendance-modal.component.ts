@@ -1,8 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { TimesheetServiceService } from '../shared/timesheet-service.service';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-attendance-modal',
@@ -26,7 +25,6 @@ export class AttendanceModalComponent implements OnInit {
 
   mask1 = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[0-9]/, '/', /\d/, /\d/, /\d/, /\d/];
   mask2 = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[0-9]/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /[0-1]/, /\d/, ':', /[0-6]/, /\d/];
-  @Output() onRegisterTimeSheetEvent = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private tsService: TimesheetServiceService) { }
 
@@ -63,7 +61,7 @@ export class AttendanceModalComponent implements OnInit {
     this.timeDifference = this.differentiateTime(this.startDateString, this.endDateString);
     this.reason = form.value.reason;
 
-    
+
     console.log(this.startDateString);
 
     this.registerTimeSheet();
