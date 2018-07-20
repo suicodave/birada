@@ -12,7 +12,8 @@ import { formatDate } from '@angular/common';
 export class AttendanceModalComponent implements OnInit {
   OVERTIME_START = [
     ['8:00 AM', '05:30 PM'],
-    ['10:00 AM ', '07:30 PM']
+    ['10:00 AM ', '07:30 PM'],
+    ['01:00 PM', '09:30 PM']
   ];
   amOrPm = ['AM', 'PM'];
   timeForm: FormGroup;
