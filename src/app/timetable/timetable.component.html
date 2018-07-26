@@ -24,11 +24,11 @@
 
     <!-- Difference Column -->
     <ng-container matColumnDef="difference">
-      <th mat-header-cell *matHeaderCellDef> Time Lapsed </th>
+      <th mat-header-cell *matHeaderCellDef> Duration </th>
       <td mat-cell *matCellDef="let element"> {{element.difference.hours}}h {{element.difference.minutes}}m </td>
       <td mat-footer-cell *matFooterCellDef>
         <span *ngIf="totalDifference.hasOwnProperty('hours')">
-          {{totalDifference?.hours}}h  {{totalDifference?.minutes}}m
+          {{totalDifference?.hours}}h {{totalDifference?.minutes}}m
         </span>
 
       </td>

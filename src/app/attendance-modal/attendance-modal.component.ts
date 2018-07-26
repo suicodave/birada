@@ -62,10 +62,8 @@ export class AttendanceModalComponent implements OnInit {
     this.reason = form.value.reason;
 
 
-    console.log(this.startDateString);
 
     this.registerTimeSheet();
-    this.timeForm.reset();
 
   }
 

@@ -66,7 +66,7 @@ export class SignatoryComponent implements OnInit {
 
   buildTimeSheetArray() {
 
-    const dateFormatString = 'EEEE, MMMM dd, yyyy hh:mm a';
+    const dateFormatString = 'E, MMMM dd, yyyy hh:mm a';
     const headerColumns = [
       { text: 'Start Date', alignment: 'center', style: 'cellHeader' },
       { text: 'End Date', alignment: 'center', style: 'cellHeader' },
@@ -77,7 +77,7 @@ export class SignatoryComponent implements OnInit {
       (item) => {
         return [
           formatDate(item.startDate, dateFormatString, 'en'),
-          formatDate(item.endDate, dateFormatString, 'en'), item.difference.hours + " hour(s) and " + item.difference.minutes + " minute(s)",
+          formatDate(item.endDate, dateFormatString, 'en'), item.difference.hours + "h " + item.difference.minutes + "m",
           item.reason
         ];
       }
@@ -114,8 +114,8 @@ export class SignatoryComponent implements OnInit {
       content: [
         { text: '1st VALLEY BANK, INC. A DEVELOPMENT BANK', style: 'header' },
         { text: 'OVERTIME AUTHORIZATION/CLAIM FORM', style: 'header' },
-        { text: `Month of ${monthOf}`, alignment: 'center', marginTop: 30 },
-        { text: `Date Generated: ${dateGenerated}`, alignment: 'center', marginTop: 10 },
+        { text: `Month of ${monthOf}`, alignment: 'center' },
+        { text: `Date Generated: ${dateGenerated}`, alignment: 'center' },
 
         {
 
@@ -155,10 +155,11 @@ export class SignatoryComponent implements OnInit {
           fontSize: 12,
           color: 'black',
           border: 'none',
-          marginTop: 45
+          marginTop:10
+          
         },
         cellHeader: {
-          margin: 15
+          margin: 2
         },
         overTime: {
           bold: true,
@@ -167,9 +168,9 @@ export class SignatoryComponent implements OnInit {
           marginTop: 35
         },
         header: {
-          margin: 15,
+          
           alignment: 'center',
-          fontSize: 18
+          fontSize: 15
         },
         footer: {
           margin: 15,
