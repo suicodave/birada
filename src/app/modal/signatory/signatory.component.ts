@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TimesheetServiceService } from '../../shared/timesheet-service.service';
-import { formatDate } from '@angular/common';
+import { formatDate, TitleCasePipe } from '@angular/common';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { MatDialogRef } from 'node_modules/@angular/material';
@@ -12,7 +12,7 @@ import { MatDialogRef } from 'node_modules/@angular/material';
 })
 export class SignatoryComponent implements OnInit {
   signatoryForm: FormGroup
-  constructor(private formBuilder: FormBuilder, private tsService: TimesheetServiceService, private dialogRef: MatDialogRef<SignatoryComponent>) {
+  constructor(private formBuilder: FormBuilder, private tsService: TimesheetServiceService, private dialogRef: MatDialogRef<SignatoryComponent>, ) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
   }
   personalData;
@@ -26,7 +26,9 @@ export class SignatoryComponent implements OnInit {
 
   initForm() {
     this.signatoryForm = this.formBuilder.group({
+
       employeeName: ['', Validators.required],
+      position: ['', Validators.required],
       officerName: ['', Validators.required],
       branchName: ['', Validators.required]
     });
@@ -58,7 +60,7 @@ export class SignatoryComponent implements OnInit {
       content: this.buildTimeSheetArray()
     };
 
-    const a = this.generateReport(this.personalData.employeeName, this.personalData.officerName, this.personalData.branchName);
+    const a = this.generateReport(this.personalData.employeeName, this.personalData.position, this.personalData.officerName, this.personalData.branchName);
 
     this.dialogRef.close();
 
@@ -102,7 +104,12 @@ export class SignatoryComponent implements OnInit {
     return timeSheetToArray;
   }
 
-  generateReport(employeeName, officerName, branchName) {
+  generateReport(rawEmployeeName, rawPosition, rawOfficerName, rawBranchName) {
+    const titleCasePipe = new TitleCasePipe();
+    const employeeName = titleCasePipe.transform(rawEmployeeName);
+    const position = titleCasePipe.transform(rawPosition);
+    const officerName = titleCasePipe.transform(rawOfficerName);
+    const branchName = titleCasePipe.transform(rawBranchName);
     // playground requires you to assign document definition to a variable called dd
     const dateFormatString = 'EEEE, MMMM dd, yyyy hh:mm a';
     const monthOf = formatDate(new Date(), 'MMMM', 'en');
@@ -140,7 +147,7 @@ export class SignatoryComponent implements OnInit {
                 { text: `${branchName}`, alignment: 'center' }
               ],
               [
-                { text: 'Employee', alignment: 'center' },
+                { text: `${position}`, alignment: 'center' },
                 { text: 'Approving Officer/Supervisor', alignment: 'center' }, { text: 'Branch/Department', alignment: 'center' }
               ]
 
@@ -155,8 +162,8 @@ export class SignatoryComponent implements OnInit {
           fontSize: 12,
           color: 'black',
           border: 'none',
-          marginTop:10
-          
+          marginTop: 10
+
         },
         cellHeader: {
           margin: 2
@@ -168,7 +175,7 @@ export class SignatoryComponent implements OnInit {
           marginTop: 35
         },
         header: {
-          
+
           alignment: 'center',
           fontSize: 15
         },
@@ -189,6 +196,6 @@ export class SignatoryComponent implements OnInit {
     return dd;
   }
 
-  
+
 
 }

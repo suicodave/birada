@@ -52,7 +52,7 @@ export class TimetableComponent implements OnInit {
 
   openSignatoryModal() {
     this.signatoryModal.open(SignatoryComponent, {
-      width: '300px'
+      width: '400px'
     })
   }
 

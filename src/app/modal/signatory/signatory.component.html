@@ -3,27 +3,32 @@
 </p>
 
 <mat-dialog-content>
-  <form [formGroup]="signatoryForm" (ngSubmit)="onFormSubmit(signatoryForm)" fxLayout="column" fxLayoutAlign="center"
-    fxLayoutGap="5px">
+  <form [formGroup]="signatoryForm" (ngSubmit)="onFormSubmit(signatoryForm)" fxLayout="column" fxLayoutAlign="center">
 
-    <p>
-      <mat-form-field appearance="standard">
-        <mat-label>Your Name</mat-label>
-        <input matInput formControlName="employeeName" placeholder="Full Name">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="standard">
-        <mat-label>Your Supervisor's Name</mat-label>
-        <input matInput formControlName="officerName" placeholder="Bossing">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="standard">
-        <mat-label>Branch</mat-label>
-        <input matInput formControlName="branchName">
-      </mat-form-field>
-    </p>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Your Name</mat-label>
+      <input matInput formControlName="employeeName" placeholder="Full Name">
+    </mat-form-field>
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Your Designation</mat-label>
+      <input matInput formControlName="position" placeholder="Teller, Operation Supervisor, Manager">
+    </mat-form-field>
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Your Supervisor's Name</mat-label>
+      <input matInput formControlName="officerName" placeholder="Bossing">
+    </mat-form-field>
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Branch</mat-label>
+      <input matInput formControlName="branchName">
+    </mat-form-field>
+
 
     <button style="display: none"></button>
 
