@@ -9,6 +9,10 @@
     {{time[1]}} for {{time[0]}} Time in
   </p>
 
+  <mat-slide-toggle color="primary" (change)="toggleCustomOvertime()" matTooltip="Allows you to enter custom start date and time"
+    matTooltipPosition="above" [checked]="isCustomOvertime">
+    Enable Sunday Overtime
+  </mat-slide-toggle>
 
 
   <div fxLayoutGap="20px">
@@ -19,13 +23,22 @@
 
         <mat-form-field appearance="fill" fxFlex="65%">
           <mat-label>Start Date</mat-label>
-          <input class="date-control" [textMask]="{mask: mask1}" matInput placeholder="mm/dd/yyy" autocomplete="off" formControlName="startDate">
+          <input class="date-control" [textMask]="{mask: startDateMask}" matInput [placeholder]="startDatePlaceholder" autocomplete="off"
+            formControlName="startDate">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" fxFlex="35%">
+        <mat-form-field appearance="fill" fxFlex="35%" *ngIf="!isCustomOvertime">
           <mat-select formControlName="timeSlot">
             <mat-option *ngFor="let item of OVERTIME_START" [value]="item[1]">
               {{item[0]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" fxFlex="35%" *ngIf="isCustomOvertime">
+          <mat-select formControlName="timeSlot">
+            <mat-option *ngFor="let item of amOrPm" [value]="item">
+              {{item}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -37,7 +50,7 @@
 
         <mat-form-field appearance="fill" fxFlex="75%">
           <mat-label>End Date</mat-label>
-          <input matInput placeholder="mm/dd/yyy hh:mm" autocomplete="off" [textMask]="{mask: mask2}" formControlName="endDate">
+          <input matInput placeholder="mm/dd/yyy hh:mm" autocomplete="off" [textMask]="{mask: endDateMask}" formControlName="endDate">
         </mat-form-field>
 
         <mat-form-field appearance="fill" fxFlex="35%">

@@ -17,14 +17,15 @@ export class AttendanceModalComponent implements OnInit {
   amOrPm = ['AM', 'PM'];
   timeForm: FormGroup;
   showResult = false;
-
+  isCustomOvertime = false;
   startDateString;
+  startDatePlaceholder = 'mm/dd/yyy';
   endDateString;
   timeDifference;
   reason;
 
-  mask1 = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[0-9]/, '/', /\d/, /\d/, /\d/, /\d/];
-  mask2 = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[0-9]/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /[0-1]/, /\d/, ':', /[0-6]/, /\d/];
+  startDateMask = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[0-9]/, '/', /\d/, /\d/, /\d/, /\d/];
+  endDateMask = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[0-9]/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /[0-1]/, /\d/, ':', /[0-6]/, /\d/];
 
   constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private tsService: TimesheetServiceService) { }
 
@@ -42,6 +43,21 @@ export class AttendanceModalComponent implements OnInit {
     });
   }
 
+  toggleCustomOvertime() {
+    this.isCustomOvertime = !this.isCustomOvertime;
+    if (this.isCustomOvertime) {
+      this.timeForm.controls.timeSlot.patchValue(this.amOrPm[1]);
+      this.startDateMask = [...this.startDateMask, ' ', /[0-1]/, /\d/, ':', /[0-6]/, /\d/];
+      this.startDatePlaceholder = 'mm/dd/yyy hh:mm';
+    } else {
+      this.timeForm.controls.timeSlot.patchValue(this.OVERTIME_START[0][1]);
+      this.startDatePlaceholder = 'mm/dd/yyy';
+      this.startDateMask = [/[0-1]/, /[1-9]/, '/', /[0-3]/, /[0-9]/, '/', /\d/, /\d/, /\d/, /\d/];
+    }
+    this.timeForm.controls.startDate.patchValue('');
+    return this.isCustomOvertime;
+  }
+
   onDateTimeSubmit(form: FormGroup) {
     if (!form.valid) {
       this.snackBar.open('Invalid data please check your entries!', 'Okay');
@@ -51,7 +67,7 @@ export class AttendanceModalComponent implements OnInit {
     const endDateString = this.concatDateString(form.value.endDate, form.value.amPM2);
 
 
-    if (this.validateDateFromString(startDateString) == 'Invalid Date' || this.validateDateFromString(endDateString) == 'Invalid Date') {
+    if (this.areDatesValid(startDateString, endDateString)) {
       this.snackBar.open('Invalid data please check your entries!', 'Okay');
       return;
     }
@@ -67,7 +83,9 @@ export class AttendanceModalComponent implements OnInit {
 
   }
 
-
+  areDatesValid(startDateString, endDateString) {
+    return this.validateDateFromString(startDateString) == 'Invalid Date' || this.validateDateFromString(endDateString) == 'Invalid Date';
+  }
 
   concatDateString(startDate, amPM) {
     return startDate + ' ' + amPM
