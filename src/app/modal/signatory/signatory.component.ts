@@ -129,7 +129,7 @@ export class SignatoryComponent implements OnInit {
           style: 'tableHeader',
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', 200],
+            widths: [180, 180, 50, 330],
             body: content,
           },
           layout: ''
@@ -148,7 +148,7 @@ export class SignatoryComponent implements OnInit {
               ],
               [
                 { text: `${position}`, alignment: 'center' },
-                { text: 'Approving Officer/Supervisor', alignment: 'center' }, { text: 'Branch/Department', alignment: 'center' }
+                { text: 'Branch Manager/Department Head', alignment: 'center' }, { text: 'Branch/Department', alignment: 'center' }
               ]
 
             ],
