@@ -11,6 +11,7 @@ import { TimesheetServiceService } from '../shared/timesheet-service.service';
 export class AttendanceModalComponent implements OnInit {
     OVERTIME_START = [
         ['8:00 AM', '05:30 PM'],
+        ['9:00 AM', '6:30 PM'],
         ['10:00 AM ', '07:30 PM'],
         ['01:00 PM', '09:30 PM']
     ];
